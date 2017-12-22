@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class HomeActivity extends AppCompatActivity {
-    //HOME
+    //HOME2
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
