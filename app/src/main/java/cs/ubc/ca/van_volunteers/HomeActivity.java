@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class HomeActivity extends AppCompatActivity {
-    //Test push from home shimychu
+    //Test push from home shimychu2
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
