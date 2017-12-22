@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "339489256820",
+    "firebase_url": "https://vanvolunteers-e664d.firebaseio.com",
+    "project_id": "vanvolunteers-e664d",
+    "storage_bucket": "vanvolunteers-e664d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339489256820:android:27bb6a5f189fef3e",
+        "android_client_info": {
+          "package_name": "cs.ubc.ca.van_volunteers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339489256820-903f9adltgjksigbcdvvsg664m6bkjl4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIc-782hWJrUWPx6-9wub4kbmtTbf0Ci8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
