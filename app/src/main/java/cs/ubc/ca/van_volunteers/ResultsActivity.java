@@ -1,6 +1,7 @@
 package cs.ubc.ca.van_volunteers;
 
 import android.app.DownloadManager;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -22,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,7 +38,6 @@ public class ResultsActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private DatabaseReference post_reference;
-    private Query query;
     private FirebaseRecyclerAdapter<Post, PostViewHolder> recyclerAdapter;
 
     @Override
@@ -50,23 +52,21 @@ public class ResultsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        post_reference = database.getReference().child("Post");
-
+        post_reference = database.getReference("Post");
 
         loadPosts();
     }
 
     public void loadPosts(){
-        if (keyword != "seeAll"){
-            //TODO: add to query.
-        }
+        Query query = post_reference;
+
+        //TODO: query for different keyword.
 
         FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
                 .setQuery(query, Post.class)
                 .build();
 
-        recyclerAdapter = new FirebaseRecyclerAdapter<Post, PostViewHolder> (
-                options) {
+        recyclerAdapter = new FirebaseRecyclerAdapter<Post, PostViewHolder> (options) {
 
             @Override
             public PostViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -75,14 +75,21 @@ public class ResultsActivity extends AppCompatActivity {
             }
 
             @Override
-            protected void onBindViewHolder(PostViewHolder holder, int position, Post model) {
+            protected void onBindViewHolder(PostViewHolder holder, int position, final Post model) {
                 holder.setTitle(model.getTitle());
                 holder.setOrganization(model.getOrganization(), model.getLocation());
                 holder.setDescription(model.getDescription());
                 holder.setDate(model.getPost_date());
+                holder.cardView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(new Intent(ResultsActivity.this, PostInfoActivity.class).putExtra("id", model.getId()));
+                    }
+                });
             }
         };
 
+        recyclerAdapter.startListening();
         recyclerView.setAdapter(recyclerAdapter);
 
     }
