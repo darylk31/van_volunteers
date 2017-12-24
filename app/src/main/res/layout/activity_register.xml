@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cs.ubc.ca.van_volunteers.RegisterActivity">
+
+    <EditText
+        android:id="@+id/etEmailAddress"
+        android:layout_width="356dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/etPassword"
+        android:layout_alignLeft="@+id/etPassword"
+        android:layout_alignStart="@+id/etPassword"
+        android:ems="10"
+        android:hint="Email Address"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="362dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/etConfirmPassword"
+        android:layout_alignEnd="@+id/bRegister"
+        android:layout_alignRight="@+id/bRegister"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:maxLength="12" />
+
+    <Button
+        android:id="@+id/bRegister"
+        android:layout_width="372dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="70dp"
+        android:text="Register"
+        tools:layout_editor_absoluteX="5dp"
+        tools:layout_editor_absoluteY="423dp" />
+
+    <EditText
+        android:id="@+id/etConfirmPassword"
+        android:layout_width="359dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/bRegister"
+        android:layout_alignRight="@+id/bRegister"
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        android:maxLength="12"
+        tools:layout_editor_absoluteX="14dp"
+        tools:layout_editor_absoluteY="132dp" />
+</RelativeLayout>

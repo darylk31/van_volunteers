@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "339489256820-lu75ap6q1lnn8uvm7s3v1j0u4cmcqe0o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cs.ubc.ca.van_volunteers",
+            "certificate_hash": "92e4e25d4708e7583fa8171f938eba75eb0212bf"
+          }
+        },
+        {
           "client_id": "339489256820-903f9adltgjksigbcdvvsg664m6bkjl4.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "339489256820-903f9adltgjksigbcdvvsg664m6bkjl4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
