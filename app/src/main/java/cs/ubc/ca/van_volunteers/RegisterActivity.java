@@ -89,6 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
         progressDialog.show();
     }
 
+
     private void hideProgressDialog() {
         progressDialog.dismiss();
     }
@@ -97,15 +98,21 @@ public class RegisterActivity extends AppCompatActivity {
     private boolean validateForm(){
         EmailAddress = etEmailAddress.getText().toString().trim();
         Password = etPassword.getText().toString().trim();
+        if (!isValidPassword(Password, etConfirmPassword.getText().toString())) {
+            Toast.makeText(getApplicationContext(), "Invalid password. \n Please enter length between 6 and 16 with only letters or numbers.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
         if(!android.util.Patterns.EMAIL_ADDRESS.matcher(EmailAddress).matches()){
             Toast.makeText(getApplicationContext(),"Invalid Email Address", Toast.LENGTH_LONG).show();
             return false;
         }
-        if(!Password.equals(etConfirmPassword.getText().toString().trim())){
-            Toast.makeText(getApplicationContext(),"Password does not match", Toast.LENGTH_LONG).show();
-            return false;
-        }
-        return true;
 
+        return true;
+    }
+
+    private boolean isValidPassword(String password, String confirmPassword) {
+        if(password.equals(null))
+            return false;
+        return (password.length() >= 6 && password.length() <= 16 && password.equals(confirmPassword));
     }
 }
