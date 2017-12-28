@@ -53,7 +53,6 @@ public class RegisterActivity extends AppCompatActivity {
                 if(!validateForm())
                     return;
                 //TODO: Add captcha verification
-
                 createUser();
             }
         });

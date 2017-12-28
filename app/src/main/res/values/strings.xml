@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">van_volunteers</string>
+    <string-array name="city_array">
+        <item>Vancouver, BC</item>
+        <item>North Vancouver, BC</item>
+        <item>Richmond, BC</item>
+        <item>Burnaby, BC</item>
+        <item>New Westminister, BC</item>
+        <item>Delta, BC</item>
+        <item>Surrey, BC</item>
+        <item>Coquitlam, BC</item>
+        <item>Langley, BC</item>
+        <item>Abbotsford, BC</item>
+        <item>Chilliwack, BC</item>
+        <item>Kamloops, BC</item>
+        <item>Kelowna, BC</item>
+        <item>Nanaimo, BC</item>
+        <item>Squamish, BC</item>
+        <item>Victoria, BC</item>
+        <item>Whistler, BC</item>
+        <item>Other</item>
+    </string-array>
 </resources>

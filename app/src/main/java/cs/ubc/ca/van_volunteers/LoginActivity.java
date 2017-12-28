@@ -29,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getViews();
+        mAuth = FirebaseAuth.getInstance();
         SignInListener();
     }
 
@@ -40,25 +41,30 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void SignInListener(){
-        final String email = etEmailAddress.getText().toString();
-        final String password = etPassword.getText().toString();
-        showProcessDialog();
         bSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(!task.isSuccessful()){
-                            Toast.makeText(getApplicationContext(),"Login Failed.", Toast.LENGTH_LONG).show();
-                            progressDialog.dismiss();
-                        } else{
-                            progressDialog.setMessage("Retrieving account details");
-                            startActivity(new Intent(LoginActivity.this,HomeActivity.class));
-                            finish();
+                final String email = etEmailAddress.getText().toString();
+                final String password = etPassword.getText().toString();
+                if (email.isEmpty() || password.isEmpty()){
+                    Toast.makeText(getApplicationContext(),"Please check your fields.", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    showProcessDialog();
+                    mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (!task.isSuccessful()) {
+                                Toast.makeText(getApplicationContext(), "Login Failed.", Toast.LENGTH_LONG).show();
+                                progressDialog.dismiss();
+                            } else {
+                                progressDialog.setMessage("Retrieving account details");
+                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                                finish();
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
         });
     }

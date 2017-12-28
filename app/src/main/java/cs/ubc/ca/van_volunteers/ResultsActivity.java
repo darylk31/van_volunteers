@@ -1,10 +1,6 @@
 package cs.ubc.ca.van_volunteers;
 
-import android.app.DownloadManager;
 import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -13,29 +9,26 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 public class ResultsActivity extends AppCompatActivity {
 
     private String keyword;
     private RecyclerView recyclerView;
+    private SearchView searchView;
+    private ImageButton sortButton;
     private LinearLayoutManager linearLayoutManager;
     private DatabaseReference post_reference;
     private FirebaseRecyclerAdapter<Post, PostViewHolder> recyclerAdapter;
@@ -45,6 +38,13 @@ public class ResultsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
         keyword = getIntent().getStringExtra("keyword");
+        searchView = findViewById(R.id.results_searchview);
+        if (!keyword.equals("seeAll")) {
+            searchView.setQuery(keyword, false);
+        }
+        setSearchListener();
+        sortButton = findViewById(R.id.b_sort);
+        setSortListener();
         recyclerView = findViewById(R.id.results_recycler);
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setStackFromEnd(true);
@@ -57,10 +57,49 @@ public class ResultsActivity extends AppCompatActivity {
         loadPosts();
     }
 
-    public void loadPosts(){
-        Query query = post_reference;
+    public void setSearchListener(){
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                if (s.isEmpty()){
+                    keyword = "seeAll";
+                    recyclerAdapter.stopListening();
+                    loadPosts();
+                } else {
+                    keyword = s;
+                    recyclerAdapter.stopListening();
+                    loadPosts();
+                }
+                return false;
+            }
 
-        //TODO: query for different keyword.
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
+    }
+
+    public void setSortListener(){
+        sortButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
+
+    }
+
+    public void loadPosts(){
+        Query query;
+        if (keyword.equals("seeAll")){
+            query = post_reference;
+        }
+        else{
+            query = post_reference
+                    .orderByChild(Utils.POST_TITLE)
+                    .startAt(keyword)
+                    .endAt(keyword + "\uf8ff");
+        }
 
         FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
                 .setQuery(query, Post.class)
@@ -77,7 +116,8 @@ public class ResultsActivity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(PostViewHolder holder, int position, final Post model) {
                 holder.setTitle(model.getTitle());
-                holder.setOrganization(model.getOrganization(), model.getLocation());
+                holder.setOrganization(model.getOrganization());
+                holder.setCity(model.getCity());
                 holder.setDescription(model.getDescription());
                 holder.setDate(model.getPost_date());
                 holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -108,9 +148,14 @@ public class ResultsActivity extends AppCompatActivity {
             tv.setText(title);
         }
 
-        public void setOrganization(String organization, String location){
+        public void setOrganization(String organization){
             TextView tv = cardView.findViewById(R.id.cardview_organization);
-            tv.setText(organization + ", " + location);
+            tv.setText(organization);
+        }
+
+        public void setCity (String city){
+            TextView tv = cardView.findViewById(R.id.cardview_city);
+            tv.setText(city);
         }
 
         public void setDescription(String description){
@@ -120,20 +165,16 @@ public class ResultsActivity extends AppCompatActivity {
 
         public void setDate(String dateString) {
             TextView tv = cardView.findViewById(R.id.cardview_datePosted);
-            Calendar today = Calendar.getInstance();
-            Date dateToday = null;
+            String dateOutput = null;
             try {
-                dateToday = new SimpleDateFormat("yyyy-MM-dd").parse(today.toString());
-                Date cardDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
-                if (dateToday == cardDate) {
-                    tv.setText("Today");
-                } else{
-                    String dateOutput = new SimpleDateFormat("MMM dd", Locale.ENGLISH).format(dateString);
-                    tv.setText(dateOutput);
-                }
+                Date post_date = new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
+                SimpleDateFormat card_date_format = new SimpleDateFormat("MMM dd");
+                dateOutput = card_date_format.format(post_date);
+
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+            tv.setText(dateOutput);
         }
     }
 }

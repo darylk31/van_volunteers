@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:paddingHorizontal="15dp"
     tools:context="cs.ubc.ca.van_volunteers.RegisterActivity">
 
     <EditText
         android:id="@+id/etEmailAddress"
-        android:layout_width="356dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/etPassword"
         android:layout_alignLeft="@+id/etPassword"
@@ -16,16 +18,15 @@
         android:ems="10"
         android:hint="Email Address"
         android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <EditText
         android:id="@+id/etPassword"
-        android:layout_width="362dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/etConfirmPassword"
-        android:layout_alignEnd="@+id/bRegister"
-        android:layout_alignRight="@+id/bRegister"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
@@ -33,26 +34,31 @@
 
     <Button
         android:id="@+id/bRegister"
-        android:layout_width="372dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="70dp"
-        android:text="Register"
-        tools:layout_editor_absoluteX="5dp"
-        tools:layout_editor_absoluteY="423dp" />
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginBottom="30dp"
+        android:text="Register" />
 
     <EditText
         android:id="@+id/etConfirmPassword"
-        android:layout_width="359dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/bRegister"
-        android:layout_alignRight="@+id/bRegister"
-        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/etPassword"
         android:ems="10"
         android:hint="Confirm Password"
         android:inputType="textPassword"
-        android:maxLength="12"
-        tools:layout_editor_absoluteX="14dp"
-        tools:layout_editor_absoluteY="132dp" />
+        android:maxLength="12" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/volunteer_logo" />
 </RelativeLayout>

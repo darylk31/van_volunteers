@@ -8,7 +8,8 @@ public class Post {
     private String title;
     private String organization;
     private String post_date;
-    private String location;
+    private String city;
+    private String address;
     private String description;
     private String phone;
     private String email;
@@ -17,13 +18,14 @@ public class Post {
 
     public Post(){}
 
-    public Post(String id, String title, String organization, String post_date, String location,
+    public Post(String id, String title, String organization, String post_date, String city, String address,
                 String description, String phone, String email){
         this.id = id;
         this.title = title;
         this.organization = organization;
         this.post_date = post_date;
-        this.location = location;
+        this.city = city;
+        this.address = address;
         this.description = description;
         this.phone = phone;
         this.email = email;
@@ -63,12 +65,12 @@ public class Post {
         this.post_date = post_date;
     }
 
-    public String getLocation() {
-        return location;
+    public String getAddress() {
+        return address;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getDescription() {
@@ -103,13 +105,9 @@ public class Post {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
-        return endDate;
-    }
+    public String getCity() {return city;}
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
-    }
+    public void setCity() {this.city = city;}
 
 
 }

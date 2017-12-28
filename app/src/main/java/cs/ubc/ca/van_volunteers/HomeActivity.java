@@ -11,10 +11,12 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity {
-    //Test push from home shimychu2
 
     private TextView tvSignUp;
     private TextView tvLogin;
+    private TextView tvWelcome;
+    private TextView tvWelcomeEmail;
+    private TextView tvNewPost;
 
     private FirebaseAuth mAuth;
 
@@ -31,22 +33,27 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void updateHomePage() {
-        //TODO: update the home page to look likea login page
-        tvLogin.setText("Login as: " + mAuth.getCurrentUser().getEmail().toString());
+        tvWelcome.setVisibility(View.VISIBLE);
+        tvWelcomeEmail.setText(mAuth.getCurrentUser().getEmail());
+        tvLogin.setText("Visit Profile");
+        tvSignUp.setVisibility(View.INVISIBLE);
+        tvNewPost.setVisibility(View.VISIBLE);
     }
 
     private void getViews(){
         tvLogin = findViewById(R.id.tv_login);
         tvSignUp = findViewById(R.id.tv_signup);
+        tvWelcome = findViewById(R.id.tv_welcome);
+        tvWelcomeEmail = findViewById(R.id.tv_welcome_email);
+        tvNewPost = findViewById(R.id.tv_newPost);
     }
 
     private void setListener(){
         tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //If user is logged in
                 if(mAuth.getCurrentUser() != null){
-
+                    startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
                 } else {
                     startActivity(new Intent(HomeActivity.this,LoginActivity.class));
                 }
@@ -55,22 +62,19 @@ public class HomeActivity extends AppCompatActivity {
         tvSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mAuth.getCurrentUser() != null){
-                    tvSignUp.setText("Sign Out");
-                    tvSignUp.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            mAuth.signOut();
-                        }
-                    });
-                } else{
                     startActivity(new Intent(HomeActivity.this,RegisterActivity.class));
-                }
+            }
+        });
+        tvNewPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeActivity.this, CreatePostActivity.class));
             }
         });
     }
+
     public void onSeeAll(View view){
-        startActivity(new Intent(this, ResultsActivity.class).putExtra("keybord", "seeAll"));
+        startActivity(new Intent(this, ResultsActivity.class).putExtra("keyword", "seeAll"));
     }
 
     public void onSearch(View view){
