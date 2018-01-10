@@ -1,5 +1,7 @@
 package cs.ubc.ca.van_volunteers;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -17,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class PostInfoActivity extends AppCompatActivity {
     String id;
+    String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -24,18 +27,19 @@ public class PostInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_post_info);
         id = getIntent().getStringExtra("id");
 
-        FirebaseDatabase.getInstance().getReference("Post").child(id).addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference("Post").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Post post = dataSnapshot.getValue(Post.class);
-                TextView title = findViewById(R.id.tv_post_title);
-                title.setText(post.getTitle());
+                TextView tv_title = findViewById(R.id.tv_post_title);
+                title = post.getTitle();
+                tv_title.setText(title);
                 TextView organization = findViewById(R.id.tv_post_organization);
                 organization.setText(post.getOrganization());
                 TextView city = findViewById(R.id.tv_post_city);
                 city.setText(post.getCity());
 
-                if (post.getAddress() == null){
+                if (post.getAddress() == ""){
                     RelativeLayout addresslayout = findViewById(R.id.layout_address);
                     addresslayout.setVisibility(View.INVISIBLE);
                     }
@@ -44,32 +48,16 @@ public class PostInfoActivity extends AppCompatActivity {
                     address.setText(post.getAddress());
                 }
 
-                if (post.getDescription() == null){
-                    RelativeLayout descriptionlayout = findViewById(R.id.layout_description);
-                    descriptionlayout.setVisibility(View.INVISIBLE);
-                    }
-                else {
-                    TextView description = findViewById(R.id.tv_post_description);
-                    description.setText(post.getDescription());
+                TextView description = findViewById(R.id.tv_post_description);
+                description.setText(post.getDescription());
 
-                }
-
-                if (post.getEmail() == null){
+                if (post.getEmail() == ""){
                     RelativeLayout emaillayout = findViewById(R.id.layout_email);
                     emaillayout.setVisibility(View.INVISIBLE);
                 }
                 else {
                     TextView email = findViewById(R.id.tv_post_email);
                     email.setText(post.getEmail());
-                }
-
-                if (post.getPhone() == null){
-                    RelativeLayout phonelayout = findViewById(R.id.layout_number);
-                    phonelayout.setVisibility(View.INVISIBLE);
-                }
-                else {
-                    TextView phone = findViewById(R.id.tv_post_number);
-                    phone.setText(post.getPhone());
                 }
             }
 
@@ -78,5 +66,24 @@ public class PostInfoActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void onCall(View view){
+        TextView tv_number = findViewById(R.id.tv_post_number);
+        String number = tv_number.getText().toString();
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:"+ number));
+        startActivity(intent);
+    }
+
+    public void onEmail(View view){
+        TextView tv_email = findViewById(R.id.tv_post_email);
+        String email = tv_email.getText().toString();
+        Intent intent = new Intent(Intent.ACTION_SEND, Uri.parse("mailto:"));
+        intent.setType("message/rfc822");
+        intent.putExtra(Intent.EXTRA_EMAIL, email);
+        intent.putExtra(Intent.EXTRA_SUBJECT, title);
+
+        startActivity(intent);
     }
 }

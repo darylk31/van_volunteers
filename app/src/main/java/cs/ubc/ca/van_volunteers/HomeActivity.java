@@ -55,14 +55,14 @@ public class HomeActivity extends AppCompatActivity {
                 if(mAuth.getCurrentUser() != null){
                     startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
                 } else {
-                    startActivity(new Intent(HomeActivity.this,LoginActivity.class));
+                    startActivity(new Intent(HomeActivity.this, LoginActivity.class));
                 }
             }
         });
         tvSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    startActivity(new Intent(HomeActivity.this,RegisterActivity.class));
+                    startActivity(new Intent(HomeActivity.this,RegisterSelectionActivity.class));
             }
         });
         tvNewPost.setOnClickListener(new View.OnClickListener() {

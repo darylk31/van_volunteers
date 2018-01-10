@@ -15,10 +15,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterEmailActivity extends AppCompatActivity {
 
     private EditText etEmailAddress;
     private EditText etPassword;
@@ -27,14 +26,15 @@ public class RegisterActivity extends AppCompatActivity {
 
     private String EmailAddress;
     private String Password;
-
+    private String type;
     private ProgressDialog progressDialog;
-
     private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        type = getIntent().getStringExtra("type");
         getViews();
         buttonListener();
     }
@@ -70,11 +70,15 @@ public class RegisterActivity extends AppCompatActivity {
                     mAuth.signOut();
                 } else{
                     DatabaseReference mDatabase = Utils.getDatabase().getReference();
-                    Account newAccount = new Account(EmailAddress,false,"");
-                    mDatabase.child(Utils.ACCOUNT_DATABASE).child(mAuth.getUid()).setValue(newAccount);
-                    Toast.makeText(getApplicationContext(),"Registration Successful.",Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(RegisterActivity.this,HomeActivity.class));
-                    finish();
+                    mDatabase.child(Utils.ACCOUNT_DATABASE).child(mAuth.getUid()).setValue(type);
+                    if (type == Utils.ACCOUNT_TYPE_ORGANIZATION){
+                        startActivity(new Intent(RegisterEmailActivity.this,RegisterOrgActivity.class));
+                        finish();
+                    }
+                    else {
+                        startActivity(new Intent(RegisterEmailActivity.this,RegisterVolunteerActivity.class));
+                        finish();
+                    }
                 }
             }
         });

@@ -8,8 +8,16 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Utils {
 
+    public static final String ACCOUNT_TYPE_VOLUNTEER = "volunteer";
+    public static final String ACCOUNT_TYPE_ORGANIZATION = "organization";
+
+
     public static final String ACCOUNT_DATABASE = "Accounts";
-    public static final String ACCOUNT_POSTS = "posts";
+
+    public static final String ORGANIZATION_DATABASE = "Organizations";
+
+    public static final String VOLUNTEER_DATABASE = "Volunteers";
+
     public static final String POST_DATABASE = "Post";
     public static final String POST_TITLE = "title";
 

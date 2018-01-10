@@ -28,7 +28,7 @@ public class ResultsActivity extends AppCompatActivity {
     private String keyword;
     private RecyclerView recyclerView;
     private SearchView searchView;
-    private ImageButton sortButton;
+    private ImageButton filterButton;
     private LinearLayoutManager linearLayoutManager;
     private DatabaseReference post_reference;
     private FirebaseRecyclerAdapter<Post, PostViewHolder> recyclerAdapter;
@@ -43,8 +43,8 @@ public class ResultsActivity extends AppCompatActivity {
             searchView.setQuery(keyword, false);
         }
         setSearchListener();
-        sortButton = findViewById(R.id.b_sort);
-        setSortListener();
+        filterButton = findViewById(R.id.bFilter);
+        setFilterListener();
         recyclerView = findViewById(R.id.results_recycler);
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setStackFromEnd(true);
@@ -80,8 +80,8 @@ public class ResultsActivity extends AppCompatActivity {
         });
     }
 
-    public void setSortListener(){
-        sortButton.setOnClickListener(new View.OnClickListener() {
+    public void setFilterListener(){
+        filterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
             }

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:paddingHorizontal="15dp">
+
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/relativeLayout">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/civ_register"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/profile_image" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/civ_register"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:onClick="onUpload"
+            android:text="Upload" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/relativeLayout"
+        android:id="@+id/relativeLayout2">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleY="0.6"
+            android:scaleX="0.6"
+            android:src="@drawable/ic_account_circle_black_36dp"
+            android:id="@+id/imageView3" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bio_edit_text_bg"
+            android:hint="Full Name"
+            android:singleLine="true"
+            android:textAlignment="center" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/relativeLayout2"
+        android:paddingTop="25dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleY="0.6"
+            android:scaleX="0.6"
+            android:src="@drawable/ic_create_black_36dp"/>
+
+        <EditText
+            android:id="@+id/et_bio"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/bio_edit_text_bg"
+            android:ems="10"
+            android:gravity="bottom"
+            android:hint="Add a bio (Max. 500 characters)" />
+
+        <Button
+            android:id="@+id/bDone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_bio"
+            android:layout_marginTop="15dp"
+            android:background="@color/colorAccent"
+            android:textColor="@color/colorPrimary"
+            android:layout_centerHorizontal="true"
+            android:onClick="onDoneRegister"
+            android:text="Done" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

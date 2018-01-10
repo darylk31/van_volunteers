@@ -29,8 +29,8 @@ public class CreatePostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_post);
-        mAuth = FirebaseAuth.getInstance();
         mDatabase = Utils.getDatabase().getReference();
+        mAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -94,7 +94,6 @@ public class CreatePostActivity extends AppCompatActivity {
 
                 Post post = new Post(id, position, organization, date, city, address, description, number, email);
                 mDatabase.child(Utils.POST_DATABASE).child(id).setValue(post);
-                mDatabase.child(Utils.ACCOUNT_DATABASE).child(mAuth.getUid()).child(Utils.ACCOUNT_POSTS).child(id).setValue(true);
                 progressDialog.dismiss();
                 Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(CreatePostActivity.this, HomeActivity.class));

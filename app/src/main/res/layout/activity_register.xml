@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:paddingHorizontal="15dp"
-    tools:context="cs.ubc.ca.van_volunteers.RegisterActivity">
+    tools:context="cs.ubc.ca.van_volunteers.RegisterEmailActivity">
 
     <EditText
         android:id="@+id/etEmailAddress"

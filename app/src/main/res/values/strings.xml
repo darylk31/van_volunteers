@@ -20,4 +20,8 @@
         <item>Whistler, BC</item>
         <item>Other</item>
     </string-array>
+    <string-array name="sort_by_array">
+        <item>Date Posted</item>
+        <item>Relevance</item>
+    </string-array>
 </resources>
