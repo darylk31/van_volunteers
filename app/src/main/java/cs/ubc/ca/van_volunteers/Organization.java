@@ -9,6 +9,6 @@ public class Organization {
     public Organization(){}
 
     public Organization(String email, String address, String website, String verified){
-        
+
     }
 }
