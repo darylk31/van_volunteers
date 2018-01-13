@@ -34,7 +34,7 @@ public class CreatePostActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(CreatePostActivity.this);
         builder.setTitle("Discard");
         builder.setMessage("All information will be discarded, are you sure?");
@@ -55,49 +55,47 @@ public class CreatePostActivity extends AppCompatActivity {
         alert.show();
     }
 
-    public void onCancel(View view){
+    public void onCancel(View view) {
         onBackPressed();
     }
 
 
-    public void onPost(View view){
+    public void onPost(View view) {
         EditText et_position = findViewById(R.id.et_position);
-        EditText et_organization = findViewById(R.id.et_organization);
         EditText et_description = findViewById(R.id.et_description);
-        EditText et_address = findViewById(R.id.et_address);
-        EditText et_email = findViewById(R.id.et_email);
-        EditText et_number = findViewById(R.id.et_number);
         Spinner city_spinner = findViewById(R.id.spinner_city);
 
+        EditText et_number = findViewById(R.id.et_number);
+        EditText et_address = findViewById(R.id.et_address);
+        EditText et_age = findViewById(R.id.et_age);
+        EditText et_experience = findViewById(R.id.et_experience);
+
         String position = et_position.getText().toString();
-        String organization = et_organization.getText().toString();
         String description = et_description.getText().toString();
-        String address = et_address.getText().toString();
-        String email = et_email.getText().toString();
-        String number = et_number.getText().toString();
         String city = city_spinner.getSelectedItem().toString();
 
+        String number = et_number.getText().toString();
+        String address = et_address.getText().toString();
+        String age = et_age.getText().toString();
+        String experience = et_experience.getText().toString();
 
-        if (position.isEmpty() || organization.isEmpty() || city.isEmpty()) {
+        if (position.isEmpty() || city.isEmpty() || description.isEmpty()) {
             Toast.makeText(getApplicationContext(), "Please ensure starred forms are not empty.", Toast.LENGTH_SHORT).show();
-        }
-        else
-            if (email.isEmpty() && number.isEmpty()){
-                Toast.makeText(getApplicationContext(), "Please provide contact information.", Toast.LENGTH_SHORT).show();
-            }
-            else {
-                showProcessDialog();
-                String id = mDatabase.push().getKey();
-                Calendar calendar = Calendar.getInstance();
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                String date = dateFormat.format(calendar.getTime());
+        } else {
+            showProcessDialog();
+            String id = mDatabase.push().getKey();
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            String date = dateFormat.format(calendar.getTime());
 
-                Post post = new Post(id, position, organization, date, city, address, description, number, email);
-                mDatabase.child(Utils.POST_DATABASE).child(id).setValue(post);
-                progressDialog.dismiss();
-                Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(CreatePostActivity.this, HomeActivity.class));
-            }
+            Post post = new Post(id, position, mAuth.getCurrentUser().getDisplayName(), mAuth.getCurrentUser().getUid(),
+                    date, date, city, description, mAuth.getCurrentUser().getEmail());
+            mDatabase.child(Utils.POST_DATABASE).child(id).setValue(post);
+            mDatabase.child(Utils.ORGANIZATION_DATABASE).child(mAuth.getCurrentUser().getUid()).child(Utils.ORGANIZATION_POSTS).child(id).setValue(true);
+            progressDialog.dismiss();
+            Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(CreatePostActivity.this, HomeActivity.class));
+        }
     }
 
     private void showProcessDialog() {

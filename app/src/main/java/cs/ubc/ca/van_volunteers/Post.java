@@ -1,9 +1,5 @@
 package cs.ubc.ca.van_volunteers;
 
-/**
- * Created by Daryl on 12/19/2017.
- */
-
 public class Post {
     private String title;
     private String organization;
@@ -17,7 +13,7 @@ public class Post {
 
     public Post(){}
 
-    public Post(String id, String title, String organization, String post_date, String start_date, String city, String address,
+    public Post(String id, String title, String organization, String oid, String post_date, String start_date, String city,
                 String description, String email){
         this.id = id;
         this.title = title;
@@ -25,7 +21,6 @@ public class Post {
         this.post_date = post_date;
         this.start_date = start_date;
         this.city = city;
-        this.address = address;
         this.description = description;
         this.email = email;
         this.oid = oid;

@@ -28,19 +28,19 @@
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword" />
+
     <TextView
         android:id="@+id/tv_forgotPassword"
-        android:padding="10dp"
-        android:textColor="@color/colorPrimaryDark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/etEmailAddress"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="38dp"
+        android:padding="10dp"
         android:text="Forgot password?" />
     <Button
         android:id="@+id/bSignIn"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_forgotPassword"
@@ -48,6 +48,16 @@
         android:background="@color/colorAccent"
         android:textColor="@color/colorPrimary"
         android:text="Sign In" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Don't have an account? Register!"
+        android:paddingBottom="15dp"
+        android:onClick="onRegister"
+        android:textColor="@color/colorPrimaryDark" />
 
     <ImageView
         android:layout_width="wrap_content"

@@ -2,6 +2,7 @@ package cs.ubc.ca.van_volunteers;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -59,8 +63,7 @@ public class LoginActivity extends AppCompatActivity {
                                 progressDialog.dismiss();
                             } else {
                                 progressDialog.setMessage("Retrieving account details");
-                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                                finish();
+                                getAccountType();
                             }
                         }
                     });
@@ -74,5 +77,29 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setTitle("Login");
         progressDialog.setMessage("Logging in...");
         progressDialog.show();
+    }
+
+    public void onRegister(View view){
+        startActivity(new Intent(LoginActivity.this, RegisterSelectionActivity.class));
+    }
+
+    public void getAccountType(){
+        String uid = mAuth.getCurrentUser().getUid();
+        Utils.getDatabase().getReference().child(Utils.ACCOUNT_DATABASE).child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String account_type = (String) dataSnapshot.getValue();
+                SharedPreferences.Editor editor = getSharedPreferences(Utils.APP_PACKAGE, MODE_PRIVATE).edit();
+                editor.putString("account_type", account_type);
+                editor.commit();
+                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                finish();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

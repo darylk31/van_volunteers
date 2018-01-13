@@ -2,6 +2,7 @@ package cs.ubc.ca.van_volunteers;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +15,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class RegisterEmailActivity extends AppCompatActivity {
@@ -40,10 +44,10 @@ public class RegisterEmailActivity extends AppCompatActivity {
     }
 
     private void getViews(){
-        etEmailAddress = (EditText) findViewById(R.id.etEmailAddress);
-        etPassword = (EditText) findViewById(R.id.etPassword);
-        etConfirmPassword = (EditText) findViewById(R.id.etConfirmPassword);
-        bRegister = (Button) findViewById(R.id.bRegister);
+        etEmailAddress = findViewById(R.id.etEmailAddress);
+        etPassword = findViewById(R.id.etPassword);
+        etConfirmPassword = findViewById(R.id.etConfirmPassword);
+        bRegister = findViewById(R.id.bRegister);
     }
 
     private void buttonListener(){
@@ -71,11 +75,17 @@ public class RegisterEmailActivity extends AppCompatActivity {
                 } else{
                     DatabaseReference mDatabase = Utils.getDatabase().getReference();
                     mDatabase.child(Utils.ACCOUNT_DATABASE).child(mAuth.getUid()).setValue(type);
-                    if (type == Utils.ACCOUNT_TYPE_ORGANIZATION){
+                    if (type.equals(Utils.ACCOUNT_TYPE_ORGANIZATION)){
+                        SharedPreferences.Editor editor = getSharedPreferences(Utils.APP_PACKAGE, MODE_PRIVATE).edit();
+                        editor.putString("account_type", type);
+                        editor.commit();
                         startActivity(new Intent(RegisterEmailActivity.this,RegisterOrgActivity.class));
                         finish();
                     }
                     else {
+                        SharedPreferences.Editor editor = getSharedPreferences(Utils.APP_PACKAGE, MODE_PRIVATE).edit();
+                        editor.putString("account_type", type);
+                        editor.commit();
                         startActivity(new Intent(RegisterEmailActivity.this,RegisterVolunteerActivity.class));
                         finish();
                     }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+        <PreferenceCategory
+            android:title="Posts">
+            <Preference
+                android:key="Manage Posts"
+                android:title = "Manage Posts" />
+        </PreferenceCategory>
+
+        <PreferenceCategory
+            android:title="My Account">
+            <Preference
+                android:key="pref_key_email"
+                android:title = "Email"
+                android:summary = "Email_database" />
+            <Preference
+                android:key="pref_key_password"
+                android:title = "Change Password"/>
+            <Preference
+                android:key="pref_key_signout"
+                android:title = "Sign Out"/>
+        </PreferenceCategory>
+</PreferenceScreen>

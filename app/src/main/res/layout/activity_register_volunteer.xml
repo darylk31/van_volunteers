@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@color/colorPrimary"
     android:paddingHorizontal="15dp">
 
@@ -64,6 +70,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/relativeLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -89,19 +96,47 @@
             android:gravity="bottom"
             android:hint="Add a bio (Max. 500 characters)" />
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout4"
+        android:layout_below="@id/relativeLayout3"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/icon_birthday"
+            android:scaleY="0.8"
+            android:scaleX="0.8"
+            android:src="@drawable/cake_black_36x36"/>
+
+        <DatePicker
+            android:id="@+id/dp_birthday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner" />
+
+    </RelativeLayout>
+
         <Button
             android:id="@+id/bDone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/et_bio"
-            android:layout_marginTop="15dp"
-            android:background="@color/colorAccent"
-            android:textColor="@color/colorPrimary"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/relativeLayout4"
+            android:background="@color/colorAccent"
             android:onClick="onDoneRegister"
-            android:text="Done" />
-
-
-    </RelativeLayout>
+            android:text="Done"
+            android:textColor="@color/colorPrimary" />
 
 </RelativeLayout>
+
+
+
+</ScrollView>

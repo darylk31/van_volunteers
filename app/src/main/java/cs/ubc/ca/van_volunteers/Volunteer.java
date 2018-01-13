@@ -38,5 +38,6 @@ public class Volunteer {
         return photoURL;
     }
 
+    public String getBirthday() {return birthday;}
 
 }

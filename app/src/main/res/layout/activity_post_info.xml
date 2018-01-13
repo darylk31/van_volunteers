@@ -20,16 +20,17 @@
                 android:id="@+id/tv_post_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/black"
                 android:textSize="24dp" />
 
             <TextView
-                android:text="Organization"
                 android:id="@+id/tv_post_organization"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/black"
+                android:text="Organization"
+                android:onClick="onOrganization"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="18dp" />
 
             <TextView
@@ -79,6 +80,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_post_address"
+                android:layout_toEndOf="@+id/iv_address"
+                android:layout_toRightOf="@+id/iv_address"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="Open in Maps" />
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -116,40 +127,6 @@
 
         <RelativeLayout
             android:layout_marginTop="10dp"
-            android:id="@+id/layout_email"
-            android:onClick="onEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginBottom="5dp"
-                android:background="@android:color/darker_gray" />
-
-            <ImageView
-                android:id="@+id/iv_email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleX="0.5"
-                android:scaleY="0.5"
-                android:src="@drawable/ic_email_black_24dp"/>
-
-            <TextView
-                android:text="Email"
-                android:id="@+id/tv_post_email"
-                android:layout_toRightOf="@id/iv_email"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_marginTop="10dp"
             android:id="@+id/layout_number"
             android:onClick="onCall"
             android:layout_width="match_parent"
@@ -180,9 +157,40 @@
                 android:textSize="18dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+
         </RelativeLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="5dp"
+            android:background="@android:color/darker_gray" />
+
     </LinearLayout>
+
+        <RelativeLayout
+            android:paddingTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/b_apply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@color/colorAccent"
+                android:onClick="onEmail"
+                android:text="Apply"
+                android:textColor="@color/colorPrimary" />
+
+
+        </RelativeLayout>
+
+
 
     </LinearLayout>
     

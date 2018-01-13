@@ -8,6 +8,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Utils {
 
+    public static final String APP_PACKAGE = "cs.ubc.ca.van_volunteers";
+
     public static final String ACCOUNT_TYPE_VOLUNTEER = "volunteer";
     public static final String ACCOUNT_TYPE_ORGANIZATION = "organization";
 
@@ -15,11 +17,14 @@ public class Utils {
     public static final String ACCOUNT_DATABASE = "Accounts";
 
     public static final String ORGANIZATION_DATABASE = "Organizations";
+    public static final String ORGANIZATION_POSTS = "posts";
 
     public static final String VOLUNTEER_DATABASE = "Volunteers";
+    public static final String VOLUNTEER_APPLIED = "applied";
 
     public static final String POST_DATABASE = "Post";
     public static final String POST_TITLE = "title";
+    public static final String POST_APPLIED = "applied";
 
     private static FirebaseDatabase mDatabase;
 

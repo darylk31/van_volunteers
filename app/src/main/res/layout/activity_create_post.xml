@@ -19,15 +19,6 @@
         android:padding="10dp"
         android:hint="Position*" />
 
-    <EditText
-        android:id="@+id/et_organization"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:padding="10dp"
-        android:background="@color/colorPrimary"
-        android:hint="Organization Name*"/>
-
     <RelativeLayout
         android:layout_marginTop="20dp"
         android:background="@color/colorPrimary"
@@ -60,6 +51,24 @@
 
 
     <EditText
+        android:id="@+id/et_description"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/description_edit_text_bg"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="Description*" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Extra Information"
+        android:textColor="@color/black"
+        android:textSize="16dp" />
+
+    <EditText
         android:id="@+id/et_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -69,33 +78,6 @@
         android:padding="10dp" />
 
     <EditText
-        android:id="@+id/et_description"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/description_edit_text_bg"
-        android:ems="10"
-        android:gravity="top"
-        android:hint="Description" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Contact (at least one required)"
-        android:textColor="@color/black"
-        android:textSize="16dp" />
-
-    <EditText
-        android:id="@+id/et_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:padding="10dp"
-        android:background="@color/colorPrimary"
-        android:hint="Email"/>
-
-    <EditText
         android:id="@+id/et_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -103,6 +85,24 @@
         android:padding="10dp"
         android:background="@color/colorPrimary"
         android:hint="Phone Number"/>
+
+    <EditText
+        android:id="@+id/et_age"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:background="@color/colorPrimary"
+        android:hint="Recommended Age"/>
+
+    <EditText
+        android:id="@+id/et_experience"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:background="@color/colorPrimary"
+        android:hint="Recommended Experience"/>
 
     <RelativeLayout
         android:layout_marginTop="10dp"

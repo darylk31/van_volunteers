@@ -8,9 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -43,13 +42,19 @@ public class RegisterVolunteerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register_volunteer);
         mAuth = FirebaseAuth.getInstance();
         volunteerRef = Utils.getDatabase().getReference().child(Utils.VOLUNTEER_DATABASE).child(mAuth.getCurrentUser().getUid());
+        getSupportActionBar().setTitle("Profile Update");
     }
 
     public void onDoneRegister(View view){
         EditText etname = findViewById(R.id.et_name);
         EditText etbio = findViewById(R.id.et_bio);
+        DatePicker picker = findViewById(R.id.dp_birthday);
         String name = etname.getText().toString();
         String bio = etbio.getText().toString();
+
+        String month = String.format("%02d", (picker.getMonth()+1));
+        String birthday = Integer.toString(picker.getYear()) + "-" + month + "-" + Integer.toString(picker.getDayOfMonth());
+
         if(TextUtils.isEmpty(name)) {
             etname.setError("Name required.");
             return;
@@ -58,8 +63,11 @@ public class RegisterVolunteerActivity extends AppCompatActivity {
             etbio.setError("Bio required.");
             return;
         }
-        Volunteer volunteer = new Volunteer(name, bio, mAuth.getCurrentUser().getEmail(), photoURL);
+
+
+        Volunteer volunteer = new Volunteer(name, bio, mAuth.getCurrentUser().getEmail(), photoURL, birthday);
         volunteerRef.setValue(volunteer);
+        Toast.makeText(RegisterVolunteerActivity.this, "Profile updated!", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(RegisterVolunteerActivity.this, HomeActivity.class));
     }
 
