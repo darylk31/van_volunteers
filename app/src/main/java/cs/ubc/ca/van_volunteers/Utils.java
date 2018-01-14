@@ -9,6 +9,9 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Utils {
 
     public static final String APP_PACKAGE = "cs.ubc.ca.van_volunteers";
+    public static final String ALGOLIA_DATABASE = "BCV09S4M52";
+    public static final String ALGOLIA_SERACH_KEY = "4f0c7c65d9ada147e5cb9a86201bd82e";
+    public static final String ALGOLIA_INDEX = "Post";
 
     public static final String ACCOUNT_TYPE_VOLUNTEER = "volunteer";
     public static final String ACCOUNT_TYPE_ORGANIZATION = "organization";

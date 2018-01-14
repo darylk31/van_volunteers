@@ -16,6 +16,9 @@ import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import com.algolia.search.saas.AlgoliaException;
+import com.algolia.search.saas.Client;
+import com.algolia.search.saas.Index;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,9 +26,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import org.json.JSONObject;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class ResultsActivity extends AppCompatActivity {
 
@@ -38,6 +44,11 @@ public class ResultsActivity extends AppCompatActivity {
     private FirebaseRecyclerAdapter<Post, PostViewHolder> recyclerAdapter;
     private String account_type;
     private FirebaseAuth mAuth;
+
+    //Algolia
+    private Index index;
+    private Client client;
+    private com.algolia.search.saas.Query query;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +80,14 @@ public class ResultsActivity extends AppCompatActivity {
         post_reference = database.getReference("Post");
 
         loadPosts();
+
+        //Algolia
+        // Pre-build query.
+        query = new com.algolia.search.saas.Query();
+        //We would set this on our own
+        query.setAttributesToRetrieve("title", "image", "rating", "year");
+        query.setAttributesToHighlight("title");
+        query.setHitsPerPage(20);
     }
 
     public void setSearchListener(){
@@ -228,4 +247,30 @@ public class ResultsActivity extends AppCompatActivity {
         }
         return true;
     }
+
+    private void connectToAlgolia(){
+        client = new Client(Utils.ALGOLIA_DATABASE,Utils.ALGOLIA_SERACH_KEY);
+        index = client.getIndex(Utils.ALGOLIA_INDEX);
+    }
+
+    private void algoliaSearch()
+    {
+        query.setQuery(searchView.getQuery().toString());
+        // [...]
+        index.searchAsync(query,new SearchResultJsonParser()
+        {
+            @Override
+            public void searchResult(Index index, Query query, JSONObject jsonResults)
+            {
+                // TODO: Handle results here.
+
+            }
+            @Override
+            public void searchError(Index index, Query query, AlgoliaException e)
+            {
+                // TODO: Any error will be notified here.
+            }
+        });
+    }
+
 }
