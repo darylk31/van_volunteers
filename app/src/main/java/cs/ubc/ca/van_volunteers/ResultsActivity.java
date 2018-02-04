@@ -257,20 +257,6 @@ public class ResultsActivity extends AppCompatActivity {
     {
         query.setQuery(searchView.getQuery().toString());
         // [...]
-        index.searchAsync(query,new SearchResultJsonParser()
-        {
-            @Override
-            public void searchResult(Index index, Query query, JSONObject jsonResults)
-            {
-                // TODO: Handle results here.
-
-            }
-            @Override
-            public void searchError(Index index, Query query, AlgoliaException e)
-            {
-                // TODO: Any error will be notified here.
-            }
-        });
     }
 
 }

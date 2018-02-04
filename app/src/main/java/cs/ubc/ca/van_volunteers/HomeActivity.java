@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,7 +33,17 @@ public class HomeActivity extends AppCompatActivity {
             account_type = pref.getString("account_type", "");
         }
         getSupportActionBar().setTitle("Van Volunteers");
-        setUpFloatingButton();
+        //setUpFloatingButton();
+
+        // TESTING UPLOAD ACTIVITY TO REMOVE LATER
+        Button b = findViewById(R.id.testupload);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this,VerificationUpload.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void onSeeAll(View view){

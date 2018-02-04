@@ -62,6 +62,11 @@
             android:layout_toLeftOf="@+id/b_search"
             android:layout_toStartOf="@+id/b_search"
             android:hint="Search by keyword..." />
+        <Button
+            android:id="@+id/testupload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"/>
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
